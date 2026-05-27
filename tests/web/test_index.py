@@ -409,6 +409,11 @@ class TestIndexRoute:
         assert "DS POWER (SC-QAM)" in scqam_power_card
         assert "1.0<span class=\"unit\">dBmV</span>" in scqam_power_card
         assert "256QAM" in scqam_power_card
+        status_row_start = scqam_power_card.index('<div class="metric-sub metric-status-row">')
+        status_row_end = scqam_power_card.index('</div>', status_row_start)
+        status_row = scqam_power_card[status_row_start:status_row_end]
+        assert "256QAM" not in status_row
+        assert '<div class="metric-sub metric-modulation-row">' in scqam_power_card
         assert "DS POWER (OFDM)" in ofdm_power_card
         assert "0.5<span class=\"unit\">dBmV</span>" in ofdm_power_card
         assert "4096QAM" in ofdm_power_card
